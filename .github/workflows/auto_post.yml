@@ -1,12 +1,12 @@
-name: Auto Post Hongkong Result
+name: Auto Post Cambodia Result
 
 on:
   schedule:
-    - cron: '0 16 * * *'  # Jam 23:00 WIB
-  workflow_dispatch:
+    - cron: '0 * * * *'  # Setiap 1 jam (UTC)
+  workflow_dispatch:     # Bisa dijalankan manual dari GitHub
 
 jobs:
-  auto-post-hk:
+  auto-post-cambodia:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,10 +22,10 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run HK result script
+      - name: Run Cambodia Result Script
         env:
+          WP_API_URL: ${{ secrets.WP_API_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASS: ${{ secrets.WP_PASS }}
-          WP_API_URL: ${{ secrets.WP_API_URL }}
         run: |
           python run.py
